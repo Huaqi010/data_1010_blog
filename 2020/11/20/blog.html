@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Document Classification in multiple ways | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Document Classification in multiple ways" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://huaqi010.github.io/data_1010_blog/2020/11/20/blog.html" />
+<meta property="og:url" content="https://huaqi010.github.io/data_1010_blog/2020/11/20/blog.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-20T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","url":"https://huaqi010.github.io/data_1010_blog/2020/11/20/blog.html","@type":"BlogPosting","headline":"Document Classification in multiple ways","dateModified":"2020-11-20T00:00:00-06:00","datePublished":"2020-11-20T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://huaqi010.github.io/data_1010_blog/2020/11/20/blog.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/data_1010_blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://huaqi010.github.io/data_1010_blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/data_1010_blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/data_1010_blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/data_1010_blog/about/">About Me</a><a class="page-link" href="/data_1010_blog/search/">Search</a><a class="page-link" href="/data_1010_blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Document Classification in multiple ways</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-20T00:00:00-06:00" itemprop="datePublished">
+        Nov 20, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      14 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/Huaqi010/data_1010_blog/tree/master/_notebooks/blog.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/data_1010_blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/Huaqi010/data_1010_blog/master?filepath=_notebooks%2Fblog.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/data_1010_blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/Huaqi010/data_1010_blog/blob/master/_notebooks/blog.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/data_1010_blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/blog.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Document Classification is aimed to assign a document to one or more classes or categories. This classification has been applied to many fields, including news classification, spam filtering and sentiment analysis. One traditional way is called the Rule-based methods, which is based on a complex, artificial set of rules that requires human to participate in building, revising and updating rules. It has huge limitation on applying to different conditions and costs a lot of time and investment. With the development of technology, there are some automatic document classification techniques, which are based on machine learning and data driven methods. In this article, I will focus on exploring the application of Naive Bayes, Support Vector Machines, and Neutral Network on document classification.</p>
+<h2 id="Naive-Bayes-Classifier">Naive Bayes Classifier<a class="anchor-link" href="#Naive-Bayes-Classifier"> </a></h2><p>Naive Bayes is based on the independence assumptions of Bayes’ theorem. Simply, for a given input, Bayes’ theorem is used to find the output with the maximum posterior probability $P(Y|X)$, regardless any possible correlations between the features $X$.</p>
+<p>The aim of the classifier is to find the $Y$ which could get th maximum of $P(Y|X)$.</p>
+<p><strong>Assumptions:</strong></p>
+<p>· $X$ is the input observation<br />
+· $Y$ is the target(class) variable<br />
+· $R^n$ is a set of n-dimensional vectors<br />
+· $X \subseteq R^n$ indicates that each observation has $n$ features.<br />
+· $T = \{(x_1,y_1),..., (x_n, y_n)\}$ is the train set.</p>
+<p>Based on the Bayes' thorem, given the featurs of the observation $x$, the probability of gitting $y_k$ is</p>
+$$
+P(Y = y_k|X = x) = \frac{P(Y = y_k)P(X = x|Y = y_k)}{\sum_j{P(X = x|Y = y_j)}P(Y = y_j)}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Under the independence assumptions, the conditional distribution ovr the class varirable $Y$ is</p>
+$$
+P(Y = y_k|X = x) = \frac{P(Y = y_k)\prod_{i=1}^n{P(X = x|Y = y_k)}}{\sum_jP(Y = y_j)\prod_{i=1}^n{P(X = x|Y = y_j)}}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If $P(Y = y_k|X = x) = max\{P(y_1|x),...,P(y_n|x)\}$, then the observation $x \in y_k$. Thus, the classification model could be expressed by</p>
+$$
+\begin{aligned} 
+y &amp;= argmax_{y_k}P(Y = y_k|X = x) \\ 
+&amp;= argmax_{y_k}\frac{P(Y = y_k)\prod_{i=1}^n{P(X = x|Y = y_k)}}{\sum_jP(Y = y_j)\prod_{i=1}^n{P(X = x|Y = y_j)}}
+\end{aligned}
+$$<p>Because the equation is not dependent on the y_j, we could simplify the equation to</p>
+$$
+\begin{aligned} 
+y &amp;= argmax_{y_k}P(Y=y_k)\prod_{i=1}^n{P(X = x|Y = y_k)}
+\end{aligned}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Application</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One significant attribute of text data is its large dimension. For example, a document may have thousands of wards. However, documents with different types or themes may have a large gap in terms of vocabulary, so the words appearing order can be ignored. The Naive Bayes method can be used to solve the document classification problem based on the hypothesis that every word in the document appears independently. I would like to show you how it works by the following example:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/NaiveB.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, the aim is to predict if the data in test set is in the class <code>China</code>. Firstly, I could get the prior probabilities:</p>
+<p>
+$$P(c) = 3/4, P(\bar c) = 1/4$$
+</p>
+<p>Notice that, <code>Tokyo</code>, <code>Japan</code> is not appearing in the training set in class <code>China</code>, so the conditional probability of them would be 0, which might affect the prediction on test set. Thus, Laplace Smoothing is a good choice to calculate the conditional probabilities of each word.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$P(Chinese|c)=(5+1)/(8+6)=3/7\\
+P(Tokyo|c)=P(Japan|c)=(0+1)/(8+6)=1/14\\
+P(Chinese|\bar c)=(1+1)/(3+6)=2/9 \\ 
+P(Tokyo|\bar c)=P(Japan|\bar c)=(1+1)/(3+6)=2/9$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then, we could get:</p>
+$$\begin{aligned} 
+P(c|d5)  &amp;\propto  P(c)⋅P(Chinese|c)3⋅P(Tokyo|c)⋅P(Japan|c) \\
+&amp;= \frac{3}{4} · (\frac{3}{7})^3 · \frac{1}{14} · \frac{1}{14} \\
+&amp; \approx 0.0003
+\end{aligned}
+$$$$\begin{aligned} 
+P(c|d5)  &amp;\propto  P(\bar c)⋅P(Chinese|\bar c)3⋅P(Tokyo|\bar c)⋅P(Japan|\bar c) \\
+&amp;= \frac{1}{4} · (\frac{2}{9})^3 · \frac{2}{9} · \frac{2}{9} \\
+&amp; \approx 0.0001
+\end{aligned}
+$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Thus, the Naive Bayes classifier assigns the test document to $c = China$. The reason for this classification decision is that the three occurrences of the positive indicator Chinese in d5 outweigh the occurrences of the two negative indicators Japan and Tokyo.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Naive Bayes classifier is based on Bayes’ theorem and adds independent assumption of each feature, which greatly reduces the parameter hypothesis space and simplifies the process of learning and prediction. Even the assumption of the Naive Bayes classifier seems to be simple, the performance on prediction is still good. One explanation from the article, <code>The Optimality of Naïve Bayes</code>, is that “naive Bayes may change the posterior probabilities of each class, but the class with the maximum posterior probability is often unchanged.” Although the correlation between features may be uniformly distributed in different categories, the correlation between different features may cancel each other out. Therefore, the classification could be still correct.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Support-Vector-Machine">Support Vector Machine<a class="anchor-link" href="#Support-Vector-Machine"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Support Vector Machine is a popular method to do classification. It is based on Structural Risk Minimization principle, which would maximize the margin of decision hyperplane to reduce the risk of misclassification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When SVM applies to document classification, it would compresses the data set into support vector set, to learn the decision function. It is essentially a two-class classifier, which separate the data set by a linear separator, and then could be extended to multi-class data set and non-linear cases. In this section, I would start from the advantages of SVM in document classification, and then give a linearly separable case to illustrate the steps, and finaly discuss the feasibility in document classification with several categories.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>The advantages of SVM to do document classification</strong></p>
+<p>SVM measures the complexity of the data set based on the hyperplane with which it separates the data, not the number of features.</p>
+<p>For example, if the data set with many features could be separate by one feature, then all the other features could be map to 0 and one point on the line could separate all the data:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/SVMlower.png" alt="SVM lower.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If the data set with only one feature is not linearly separable, then all the data need to be projected to higher dimensional until they can be linearly separated.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/SVMhigher.png" alt="SVM higher.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Words in documents could be consider as features by vectoring the words or calculating their tf-idf , so that one document could have a lot of features. Also, text is often linearly separable. Using SVM could lower the parameters dimension which needs to be considered and increase the efficiency of doing classification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="linearly-separable-case">linearly separable case<a class="anchor-link" href="#linearly-separable-case"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In two-class problems, there could be a lot of possible linear separatots.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/SVMlinear.png" alt="SVM linear.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To determine the best decision surface, SVM defines a hyperplane by the following variables:</p>
+<p>· $b$ is an intercept term<br />
+· $w$ is the weight vector which is perpendicular to the hyperplane<br />
+· $\{(x_i,y_i)\}$ is the training set, where $x_i$ is a point and $y_i$ is the class lable to it</p>
+<p>All points x on the hyperplane satisfy $w′x = -b$, and the two classes are always $+1$ and $-1$. Then the linear classifier could be defined as:</p>
+<p>
+$$f(x) = sign(w′x+b)$$
+</p>
+<p>When $w′x_i+b \leq -1$, $y_i =-1$; when $w′x_i+b \geq 1$, $y_i =1$. The spacing between consecutive integer level sets is $1/|w|$. Minimizing $|w|$ would maximize the margin of the hyperplane to get the best SVM model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/SVMtheorem.png" alt="SVM theorem.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I would agiain, use previous case to illustrate how SVM works in real cases. Firstly, I transfer the table into a pandas dataframe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;words&#39;</span><span class="p">:[</span><span class="s1">&#39;Chinese Beijing Chinese&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese Chinese Shanghai&#39;</span><span class="p">,</span> <span class="s1">&#39;Chinese Macao&#39;</span><span class="p">,</span> <span class="s1">&#39;Tokyo Japan Chinese&#39;</span><span class="p">],</span>
+         <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span><span class="s1">&#39;no&#39;</span><span class="p">]}</span>
+<span class="n">train_set</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="n">train_set</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>words</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chinese Beijing Chinese</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chinese Chinese Shanghai</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chinese Macao</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Tokyo Japan Chinese</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then, convert the data set into vectors by using tf-idf</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="n">tfidf_transformer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tf_train_data</span> <span class="o">=</span> <span class="n">tfidf_transformer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train_set</span><span class="o">.</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">tf_train_data</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.69183461, 0.722056  , 0.        , 0.        , 0.        ,
+        0.        ],
+       [0.        , 0.722056  , 0.        , 0.        , 0.69183461,
+        0.        ],
+       [0.        , 0.46263733, 0.        , 0.88654763, 0.        ,
+        0.        ],
+       [0.        , 0.34618161, 0.66338461, 0.        , 0.        ,
+        0.66338461]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, train the SVM model and do prediction on the test set. The result of the model matches the result of Naive Bayes Classifier.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tf_train_data</span><span class="p">,</span> <span class="n">train_set</span><span class="o">.</span><span class="n">c</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chinese Chinese Chinese Tokyo Japan&#39;</span><span class="p">]</span>
+<span class="n">tf_docs_new</span> <span class="o">=</span> <span class="n">tfidf_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tf_docs_new</span><span class="p">)</span>
+<span class="n">predicted</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;yes&#39;], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Multi-class-classification">Multi-class classification<a class="anchor-link" href="#Multi-class-classification"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In reality, a document with high dimensional features could belong to several classes. When doing document classification, people expect to have a classifier which could deal with multi-class classification. It could be done by constructing several binary classifiers. Traditionally, there are two ways:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1.<code>one-versus-rest classifiers</code>: also called “one-versus-all” or OVA classification. When training the classifier, the samples of a certain category, c_k, were classified into one category and the remaining samples into another. In this way, to classify the samples of k categories would require k SVMs, and the classifier would assign the data in test set to the class which gives it largest margin.</p>
+<p>2.<code>one-versus-one classifiers</code>: it builds a SVM between samples in any two categories. To classify samples of k categories would require to design k(k-1)/2 SVMs. When doing classification for an unseen sample in test set, the category with the most votes would be assigned to the sample.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One experiment from the book, <code>Introduction to Information Retrieval</code>, shows the success results from Joachims(1998) of using SVM to do multiclass document classification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/SVMmulti.png" alt="SVM multi.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Neutral-Network">Neutral Network<a class="anchor-link" href="#Neutral-Network"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Naive Bayes Classifier and Support Vector Machine are both based on statistic models which require elaborate feature engineering. Neural Network uses the middle layer to get the appropriate feature automatically, so that the data input could be more primitive and dense, and keep the n-dimensional array structure in the network. It could not only consider the word as a feature, but also add the words relationship in the context as a feature to do classification.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Neural-Network-theorem">Neural Network theorem<a class="anchor-link" href="#Neural-Network-theorem"> </a></h3><p>Neutral Network is designed to be similar to nervous systems, which are used to discover complex patterns and relationships in tagged data. A shallow neural network consists of three layers of neurons: input layer, hidden layer and output layer. In document classification, the input would be the word vectors matrix which requires data preprocessing, the output layer would contains all the possible categories, and the input data would be transformed several times through the hidden layers to get the final classification.</p>
+<p>The idea is for each word in the document to generate a word vector, and then merge it into the matrix according to the sentence. This word vector matrix would be put into the neural network to classify the document. The simple neural network model could be built to predict previous example as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/simple_nn.png" alt="simple nn.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>· Firslty, import Keras package and the training set shows as below:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="n">train_set</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>words</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Chinese Beijing Chinese</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Chinese Chinese Shanghai</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Chinese Macao</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Tokyo Japan Chinese</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>· Then, preprocess the data, converting the target label into 1 and 0, and convert text data into vectors</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">train_set</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">values</span> <span class="p">]</span>
+<span class="n">target</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[1, 0], [1, 0], [1, 0], [0, 1]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="n">tf_train_data</span><span class="o">.</span><span class="n">toarray</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.69183461, 0.722056  , 0.        , 0.        , 0.        ,
+       0.        ])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_set</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chinese Chinese Chinese Tokyo Japan&#39;</span><span class="p">]</span>
+<span class="n">tf_docs_new</span> <span class="o">=</span> <span class="n">tfidf_transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+<span class="n">tf_docs_new</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.       , 0.7420575, 0.4739993, 0.       , 0.       , 0.4739993]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>· Building the model with two hidden layer and one output layer, compiling the model by given the optimize method, loss function and evaluation metric. Fitting the training data into the model.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n_cols</span> <span class="o">=</span> <span class="n">tf_train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># Add the two hidden layer</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">n_cols</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+
+<span class="c1"># Add the output layer</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+                
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tf_train_data</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">target</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;tensorflow.python.keras.callbacks.History at 0x7f824219f210&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>· Putting the test data into the model and let it do prediction. The model would return the corresponding probabilities of two classes.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tf_docs_new</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.5469802 , 0.45301974]], dtype=float32)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the results 0.56172836 represents the probability in class 1, corresponding to 'yes' category. Thus, the model gives the same result in previous two models, which classify the test data into <code>China</code> category.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CNN-model">CNN model<a class="anchor-link" href="#CNN-model"> </a></h3><p>Convolution Neural Network is similiar to full coonection neural network. Each layer in CNN is made up of neurons. The difference is, rather than connecting each node in the neural network, only parts of the node is connected between adjacent layers in CNN. Thus, it could extract features in the documents to improve the accuracy in classification problems.</p>
+<p>CNN is usually composed of input layer, convolutional layer, pooling layer, full connection layer and softmax layer, which are all in the three dimension. The specific model is like following:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/data_1010_blog/images/copied_from_nb/blog_imgs/cnn.png" alt="cnn.png" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Input layer:</strong> After the text in the document is passed to the input layer, it would convert to three-dimensional input with shape of $n*k*channel$.</p>
+<p><strong>Convolutional layer:</strong> Then the input would be put into the convolutional layer. The size of the convolutional layer is $m*k*depth$, where $m$ is the length of the filter, $k$ is the dimension of embedding and $depth$ represents the depth of filter. Using different $m$ would involve different number of words to be convolved as features. For example, if $m = 1$, the convolutiional layer would return unigram feature; if $m = 2$, it would return bigram features. After passing through the convolutional layer, n-gram related features of the original text are extracted.</p>
+<p><strong>Pooling layer:</strong> The max pooling method is used in pooling layer. The filter size of the pooling layer is $convLength *1$, where $convlength$ is  the length of the feature map after convolution of text. After pooling, the dimension of feature map will be reduced to 1, so after pooling, and the vector dimension would be $depth*filterNum$, whcih is the features that represent the whole document.</p>
+<p><strong>Full connection layer and softmax layer:</strong> Finally, by using softmax, we could get the probability vectors representing different categories, and classify the document into the category with highest probability.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion"> </a></h2><p>From the above reading, I hope you have an overview about how the three methods work well on document classification. Indeed, the three methods deal with text data with different assumptions and ways.</p>
+<p>Naive Bayes Classifier adds a causation between the inputs and outputs, which indicates the appearence of certain words could lead to the certain probability to put it into certain categories. Thus, it uses prior and posterior probability to do classification and it is easy to intepret. Unlike Naive Bayes, Support Vector Machine has no assumption, and it do classification just based on the data points and the distance between them. The data points would perform differently in higher dimension, and SVMs could separate these points and classify the closer data points into one category. Neutal Network largely depends on machine learning. It assumes there is a linear or non-linear function between the inputs and the outputs. It is hard to intepret because we, as human, cannot understand how machine learns from the data and find the function, which is called the 'black box' problem. Although you could find they all give the same results in my simple example, in reality, the results could be different because of the different ways they use to get the final prediction.</p>
+<p>Facing the complex problems and needs in document classification, there are more various ways could be used to do document classification. If you are interested in exploring more details, you could check the sources in my reference.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reference">Reference<a class="anchor-link" href="#Reference"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Manning, C. D., Raghavan, P., &amp; Schütze, H. (2008). Introduction to information retrieval. Cambridge: Cambridge University Press.</p>
+<p>Yoon Kim. (2014). Convolutional Neural Networks for Sentence Classification</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/data_1010_blog/2020/11/20/blog.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/data_1010_blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/data_1010_blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/data_1010_blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/data_1010_blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/data_1010_blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
